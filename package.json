@@ -1,7 +1,8 @@
 {
   "name": "gstinapi-mcp",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "MCP server for gstinapi.in — GSTIN verification, GST return/compliance history, HSN/SAC code lookup, and MCA company registry, for use from Claude and other MCP clients.",
+  "mcpName": "io.github.CsoftTarun/gstinapi-mcp",
   "type": "module",
   "bin": {
     "gstinapi-mcp": "./src/index.js"
