@@ -1,0 +1,40 @@
+{
+  "name": "gstinapi-mcp",
+  "version": "1.0.0",
+  "description": "MCP server for gstinapi.in — GSTIN verification, GST return/compliance history, HSN/SAC code lookup, and MCA company registry, for use from Claude and other MCP clients.",
+  "type": "module",
+  "bin": {
+    "gstinapi-mcp": "./src/index.js"
+  },
+  "files": [
+    "src"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "gstin",
+    "gst",
+    "gst-verification",
+    "india",
+    "hsn",
+    "mca",
+    "claude"
+  ],
+  "author": "Tarun Soft Consultancy",
+  "license": "MIT",
+  "homepage": "https://www.gstinapi.in",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CsoftTarun/gstinapi-mcp"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.30.0",
+    "zod": "^3.24.0"
+  }
+}
