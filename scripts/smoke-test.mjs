@@ -1,9 +1,13 @@
+import { fileURLToPath } from "node:url";
+import path from "node:path";
 import { Client } from "@modelcontextprotocol/sdk/client/index.js";
 import { StdioClientTransport } from "@modelcontextprotocol/sdk/client/stdio.js";
 
+const serverPath = path.join(path.dirname(fileURLToPath(import.meta.url)), "..", "src", "index.js");
+
 const transport = new StdioClientTransport({
   command: "node",
-  args: ["D:/gstin-portal/mcp-server/src/index.js"],
+  args: [serverPath],
   env: { GSTINAPI_API_KEY: process.env.GSTINAPI_API_KEY, PATH: process.env.PATH },
 });
 

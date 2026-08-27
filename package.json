@@ -13,7 +13,8 @@
     "node": ">=18"
   },
   "scripts": {
-    "start": "node src/index.js"
+    "start": "node src/index.js",
+    "smoke-test": "node scripts/smoke-test.mjs"
   },
   "keywords": [
     "mcp",
