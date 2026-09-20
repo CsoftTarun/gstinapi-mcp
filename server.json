@@ -1,23 +1,23 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.CsoftTarun/gstinapi-mcp",
-  "description": "GSTIN verification, GST filing history, HSN/SAC lookup, and MCA company registry for India.",
+  "description": "GSTIN verification, GST filing history and HSN/SAC lookup for India.",
   "repository": {
     "url": "https://github.com/CsoftTarun/gstinapi-mcp",
     "source": "github"
   },
-  "version": "1.0.1",
+  "version": "1.0.2",
   "packages": [
     {
       "registryType": "npm",
       "identifier": "gstinapi-mcp",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "transport": {
         "type": "stdio"
       },
       "environmentVariables": [
         {
-          "description": "Your gstinapi.in API key. Free at https://www.gstinapi.in/register — 100 lookups on signup, no card required.",
+          "description": "Your gstinapi.in API key. Free at https://www.gstinapi.in/register — up to 100 free lookups, no card required.",
           "isRequired": true,
           "format": "string",
           "isSecret": true,

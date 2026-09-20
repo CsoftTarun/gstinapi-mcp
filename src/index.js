@@ -5,7 +5,7 @@ import { z } from "zod";
 
 const BASE_URL = (process.env.GSTINAPI_BASE_URL || "https://www.gstinapi.in").replace(/\/+$/, "");
 const NO_KEY_MESSAGE =
-  "GSTINAPI_API_KEY is not set. Get a free key (100 lookups, no card required) at " +
+  "GSTINAPI_API_KEY is not set. Get a free key (up to 100 free lookups, no card required) at " +
   "https://www.gstinapi.in/register, then add it to this MCP server's env config.";
 
 // Every tool below is a thin pass-through to the REST API documented at
@@ -77,19 +77,6 @@ const TOOLS = [
     path: ({ gstin, financial_year }) => `/v1/gstin/${gstin}/filing-preference?fy=${encodeURIComponent(financial_year)}`,
   },
   {
-    name: "resolve_gstin_to_company",
-    title: "Resolve a GSTIN to its likely MCA company (probabilistic)",
-    description:
-      "Matches a GSTIN to its probable company in the MCA registry. IMPORTANT: this match is " +
-      "probabilistic, not authoritative — no government dataset publishes a GSTIN-to-CIN mapping, " +
-      "so this is a scored guess from company-name similarity plus weak corroborating signals, " +
-      "returned with a high/medium/low confidence band. Never present the result as a confirmed " +
-      "fact; tell the user it is a probable match and point them to mca.gov.in to verify anything " +
-      "with legal, financial, or compliance consequence.",
-    schema: { gstin: gstin() },
-    path: ({ gstin }) => `/v1/gstin/${gstin}/company`,
-  },
-  {
     name: "lookup_hsn_code",
     title: "Look up an HSN/SAC code",
     description: "The official description for a 2-8 digit HSN (goods) or SAC (services) code, plus the chapter/heading/subheading it sits under. No GST rate is returned — the government's own master publishes no rate column, and a rate depends on more than the code alone.",
@@ -113,31 +100,6 @@ const TOOLS = [
     },
   },
   {
-    name: "lookup_mca_company",
-    title: "Look up an MCA company by CIN",
-    description: "Direct company-master lookup by CIN (Corporate Identification Number) from India's ~3.67M registered companies (source: data.gov.in RoC-wise Company Master Data, refreshed roughly quarterly). Company master fields only — no directors, charges, filings, or financial statements.",
-    schema: { cin: z.string().trim().describe("Corporate Identification Number, e.g. U72900MH2015PTC269555") },
-    path: ({ cin }) => `/v1/mca/company/${encodeURIComponent(cin.toUpperCase())}`,
-  },
-  {
-    name: "search_mca_companies",
-    title: "Search MCA companies by name",
-    description: "Fuzzy company-name search over the MCA registry, optionally filtered by state and status, paginated.",
-    schema: {
-      name: z.string().min(1),
-      state: z.string().optional().describe("Two-letter state code, e.g. MH"),
-      status: z.string().optional().describe("Company status as recorded by MCA, e.g. Active"),
-      page: z.number().int().min(1).optional(),
-    },
-    path: ({ name, state, status, page }) => {
-      const p = new URLSearchParams({ name });
-      if (state) p.set("state", state);
-      if (status) p.set("status", status);
-      if (page) p.set("page", String(page));
-      return `/v1/mca/search?${p.toString()}`;
-    },
-  },
-  {
     name: "get_usage_stats",
     title: "Get today's usage for this API key",
     description: "How many calls this API key has made today. Free — does not consume a credit.",
@@ -146,7 +108,7 @@ const TOOLS = [
   },
 ];
 
-const server = new McpServer({ name: "gstinapi", version: "1.0.0" });
+const server = new McpServer({ name: "gstinapi", version: "1.0.2" });
 
 for (const t of TOOLS) {
   server.tool(t.name, t.description, t.schema, async (args) => {
