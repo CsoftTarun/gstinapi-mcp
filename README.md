@@ -39,6 +39,12 @@ No install step — `npx` fetches it on first use.
 
 Full field-level reference: https://www.gstinapi.in/docs
 
+More from gstinapi.in:
+
+- [E-way bill and e-invoice API](https://www.gstinapi.in/e-way-bill-api): every call explained, with [error codes](https://www.gstinapi.in/e-way-bill-api-errors)
+- [GSTR-2B and GSTR-2A API](https://www.gstinapi.in/gst-return-api): the ITC statement and the 12 GSTR-2A tables as JSON
+- [GST vendor monitoring](https://www.gstinapi.in/gst-vendor-monitoring) and [bulk GSTIN verification](https://www.gstinapi.in/bulk-gstin-verification)
+
 ## Accuracy notes
 
 - Every GSTIN lookup queries the GST network live — nothing is cached.
